@@ -1,0 +1,135 @@
+@layer base, utilities, applyCSS;
+
+:root {
+    color-scheme: dark;
+    /* Dark */
+    --main-dark-bg-color: #212121;
+    --main-dark-text-color: #fff;
+    --header-dark-bg: #000000;
+
+    /* Light */
+    --main-light-bg-color: #eee;
+    --main-light-text-color: #111;
+    --header-light-bg: #424242;
+
+}
+
+@layer base {
+  *, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+
+html {
+    font-size: 62.5%;
+}
+
+.light-theme {
+    color-scheme: light;
+}
+
+body {
+    background-color: light-dark(var(--main-light-bg-color), var(--main-dark-bg-color));
+    color: light-dark(var(--main-light-text-color), var(--main-dark-text-color));
+    width: 100vw;
+    min-height: 100vh;
+    font-family: "Playfair Display", serif;
+    line-height: 1.5;
+    position: relative;
+    padding: 10rem 2rem 2rem;
+}
+
+.header{
+   background-color: light-dark(var(--header-light-bg), var(--header-dark-bg));
+   height: 7rem;
+   width: 100%;
+   padding: 1rem 2.5rem;
+   display: flex;
+   align-items: center;
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+
+   .header__nav{
+    flex: 1;
+     .nav__list {
+         height: 100%;
+         width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        list-style:none;
+
+
+        .nav__list-item {
+            
+            .logo__heading{
+                font-size: 1.8rem;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: #fff;
+            }
+
+            .dark-light__btn{
+                font-size: 2rem;
+                cursor: pointer;
+                display: block;
+            }
+        }
+     }
+   }
+}
+
+.main__heading{
+    font-size: 3.6rem;
+    text-align: center;
+    letter-spacing: 1.4px;
+}
+
+/* Utility Class */
+
+@layer utilities {
+
+    .marginTop-5 {
+        margin-top: 5rem;
+    }
+    
+    .flex_center {
+        display: flex;
+        align-items: center;
+    }
+    
+    .gap-2 {
+      gap: 2rem;
+    }
+
+    .padding-2 {
+        padding: 2rem;
+    }
+
+    .btn{
+        background-color: #0075ff;
+        color: #fff;
+        border: none;
+        font-size: 1.5rem;
+        padding: 1rem 2rem;
+        cursor: pointer;
+
+        &:hover{
+            background-color: #0266d8;
+        }
+    }
+
+}
+
+@layer applyCSS {
+  .copy__box {
+    justify-content: center;
+    p {
+        font-size: 1.8rem;
+    }
+  }
+}
