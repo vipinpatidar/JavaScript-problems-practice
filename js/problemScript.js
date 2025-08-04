@@ -159,5 +159,47 @@ function letterInAlphabe(string) {
   return alphabeticallyString;
 }
 
-console.log(letterInAlphabe("vipin patidar"));
-console.log(letterInAlphabe("sidhima"));
+// console.log(letterInAlphabe("vipin patidar"));
+// console.log(letterInAlphabe("sidhima"));
+
+/*
+Write a JavaScript program to check whether the characters a and b 
+are separated by exactly 3 places anywhere (at least once) in a 
+given string.  
+*/
+
+function separatedBy3Places(string, a, b) {
+  const i = string.indexOf(a);
+  const j = string.indexOf(b);
+
+  if (i === -1 && j === -1) return `Letter ${a} and ${b} are not in string`;
+  if (i === -1) return `Letter ${a} is not in string`;
+  if (j === -1) return `Letter ${b} is not in string`;
+
+  return Math.abs(i - j) - 1 === 3
+    ? `Given letter ${a} and ${b} are separated by 3 places`
+    : "Given Letter are not separated by 3 places";
+}
+
+// console.log(separatedBy3Places("vipin", "v", "p"));
+
+/*
+Write a JavaScript program to count the number of vowels in a given string.  
+*/
+
+function countVowels(string) {
+  const strArr = string.toLowerCase().split("");
+
+  return strArr.reduce((acc, curr) => {
+    const vowelsStr = "aeiou";
+
+    if (vowelsStr.includes(curr)) acc++;
+
+    return acc;
+  }, 0);
+}
+
+// console.log(countVowels("w3resource.com"));
+
+//TODO: Make a commit to repo
+//TODO: Stop the codespaces
