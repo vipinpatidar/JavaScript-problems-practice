@@ -201,5 +201,160 @@ function countVowels(string) {
 
 // console.log(countVowels("w3resource.com"));
 
-//TODO: Make a commit to repo
+/*
+Write a JavaScript program to create a string using the middle three 
+characters of a given string of odd length. The string length must be 
+greater than or equal to three.  
+*/
+
+function midCharString(string) {
+  if (!(string.length >= 3))
+    return "String must be greater then or equal to three";
+
+  const index = (string.length - 3) / 2;
+
+  if (string.length % 2 !== 0)
+    return string.slice(index, string.length - index);
+
+  return `${string} string is has event length`;
+}
+
+// console.log(midCharString("vipin"));
+
+/*
+Write a JavaScript program to concatenate two strings and return the result. 
+If the length of the strings does not match, then remove the characters from 
+the longer string.  
+*/
+
+function concateStingOnSameLength(string1, string2) {
+  const min = Math.min(string1.length, string2.length);
+
+  return `${string1.substring(string1.length - min)} ${string2.substring(
+    string2.length - min
+  )}`;
+}
+
+// console.log(concateStingOnSameLength("vipin", "patidar"));
+
+/*
+Write a JavaScript program to reverse the elements of a given array of integers of length 3.  
+*/
+
+function reverseArray(arr) {
+  return arr.map((elem, idx, array) => array[arr.length - 1 - idx]);
+}
+
+// console.log(reverseArray([1, 2, 3, 4]));
+
+/*
+75
+Write a JavaScript program to find the largest value between the first and 
+last elements and set all the other elements to that value. Display the updated array.
+*/
+
+function largestNumArray(array) {
+  const max = Math.max(...array);
+
+  return new Array(array.length).fill(max);
+}
+
+// console.log(largestNumArray([20, 30, 40, 50, 90]));
+// console.log(largestNumArray([-7, -9, 0]));
+
+/*
+Write a JavaScript program to add two positive integers without carrying.
+*/
+
+function addIntNotCarrying(a, b) {
+  if (a < 0 || b < 0) return "Integers must be positive";
+
+  let result = 0;
+  let num = 1;
+
+  while (a > 0 && b > 0) {
+    result += num * ((a + b) % 10); // a + b -> 1133 -> 113 -> 11
+    a = Math.floor(a / 10);
+    b = Math.floor(b / 10);
+    num *= 10;
+  }
+
+  return result;
+}
+
+// console.log(addIntNotCarrying(222, 911));
+// console.log(addIntNotCarrying(107, 1077));
+
+/*
+Write a JavaScript program to find the longest string from a given array of strings.
+*/
+
+function findLongestStringInArray(arr) {
+  let max = arr[0].length;
+
+  arr.map((str) => (max = Math.max(max, str.length)));
+  let [longStr] = arr.filter((str) => str.length === max);
+
+  return longStr;
+}
+
+// console.log(
+//   findLongestStringInArray(["vipin", "sidhima", "gunjan", "payal", "riya"])
+// );
+
+/*
+Write a JavaScript program to replace each character in a given string with the next in the English alphabet.  
+Note: 'a' will be replace by 'b' or 'z' would be replaced by 'a'.
+*/
+
+function replaceCharToNextChar(alphabetString) {
+  const charCodeOfA = "a".charCodeAt(0);
+  const charCodeOfZ = "z".charCodeAt(0);
+
+  const newStr = alphabetString
+    .toLowerCase()
+    .split("")
+    .map((str) => {
+      let strCharCode = str.charCodeAt(0);
+
+      if (strCharCode === charCodeOfZ) return String.fromCharCode(charCodeOfA);
+
+      return String.fromCharCode(strCharCode + 1);
+    })
+    .join("");
+
+  return newStr;
+}
+
+// console.log(replaceCharToNextChar("vipin"));
+// console.log(replaceCharToNextChar("abcdefghijklmnopqrstuvwxyz"));
+
+/*
+Write a JavaScript program to divide a given array of positive integers into 
+two parts. First element belongs to the first part, second element belongs to 
+the second part, and third element belongs to the first part and so on. Now 
+compute the sum of two parts and store it in an array of size two.
+*/
+
+function addOddEvenPartOfArrs(array) {
+  const newArr = array.reduce(
+    (acc, curr, i, arr) => {
+      if (i % 2 === 0) {
+        acc[0] += curr;
+      } else {
+        acc[1] += curr;
+      }
+
+      return acc;
+    },
+    [0, 0]
+  );
+
+  return newArr;
+}
+
+// console.log(addOddEvenPartOfArrs([1, 3, 6, 2, 5, 10]));
+
+// Last: 86
+//FIXME: Make a commit to repo
 //TODO: Stop the codespaces
