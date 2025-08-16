@@ -355,6 +355,231 @@ function addOddEvenPartOfArrs(array) {
 
 // console.log(addOddEvenPartOfArrs([1, 3, 6, 2, 5, 10]));
 
-// Last: 86
+/*
+Write a JavaScript program to determine if two arrays of integers 
+of the same length are similar. The arrays will be similar if one 
+array can be obtained from another array by swapping at most one 
+pair of elements.
+*/
+
+function swapArraySame(arr1, arr2) {
+  if (arr1.length !== arr2.length) return;
+
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = i; j < arr1.length; j++) {
+      console.log(i, j);
+      let result = true;
+      let temp;
+
+      temp = arr1[i];
+
+      // Swap elements
+      arr1[i] = arr1[j];
+      arr1[j] = temp;
+
+      console.log(arr1);
+
+      // Compare elements of the modified arra1 with arra2
+      for (let k = 0; k < arr1.length; k++) {
+        console.log(arr1[k], arr2[k]);
+        if (arr1[k] !== arr2[k]) {
+          result = false;
+          break;
+        }
+      }
+
+      // If the arrays match, return true
+      if (result) {
+        return true;
+      }
+
+      // Restore the original order by swapping back elements
+      arr1[j] = arr1[i];
+      arr1[i] = temp;
+    }
+  }
+
+  // If no match is found, return false
+  return false;
+}
+
+// console.log(swapArraySame([10, 20, 30], [10, 20, 30]));
+// console.log(swapArraySame([10, 20, 30], [30, 10, 20]));
+// console.log(swapArraySame([10, 20, 30, 40], [10, 30, 20, 40]));
+
+/*
+Write a JavaScript program to find the kth greatest element in a given array of integers.
+*/
+
+function findKthGretestElem(array, kth) {
+  const newArr = array.toSorted((a, b) => b - a);
+
+  return newArr[kth - 1];
+}
+
+// console.log(findKthGretestElem([-10, -25, -47, -36, 0], 1));
+
+/*
+Write a JavaScript program to find the maximum possible sum of some of its k consecutive 
+numbers (numbers that follow each other in order) in a given array of positive integers.
+*/
+
+function maxOfKconsecutiveNums(arr, k) {
+  let max = 1;
+  for (let i = 0; i < arr.length; i++) {
+    if (k + i <= arr.length) {
+      let a = arr.slice(i, k + i).reduce((a, b) => a + b, 0);
+
+      if (a >= max) {
+        max = a;
+      }
+    }
+  }
+
+  return max;
+}
+
+// console.log(maxOfKconsecutiveNums([2, 3, 8, 4, 6, 1, 6], 3));
+// console.log(maxOfKconsecutiveNums([9, 3, 5, 1, 7], 2));
+
+/*
+Write a JavaScript program to find the maximum difference between any two adjacent elements of a given array of integers.
+*/
+
+function minInAdjacentNums(arr) {
+  let max = -1;
+  let temp;
+
+  for (let i = 0; i < arr.length - 1; i++) {
+    temp = Math.abs(arr[i] - arr[i + 1]);
+    max = Math.max(temp, max);
+  }
+
+  return max;
+}
+
+// console.log(minInAdjacentNums([1, 3, 6, 4, 9, 2, 5]));
+
+/*
+Write a JavaScript program to find the maximum difference among all possible pairs of a given array of integers.
+*/
+
+function array_max_diff(arr) {
+  let max_result = 0;
+
+  // Iterate through the array elements
+  for (let i = 0; i < arr.length; i++) {
+    // skip iteration which match
+    for (let k = 0; k !== i && k < arr.length; k++) {
+      console.log(i, k);
+      let diff = Math.abs(arr[i] - arr[k]);
+      max_result = Math.max(max_result, diff);
+    }
+  }
+
+  return max_result;
+}
+
+// console.log(array_max_diff([1, 2, 3, 8, 6]));
+
+/*
+Write a JavaScript program to find the number appearing most frequently in a given array of integers. 
+*/
+
+function mostFrequentNumInArr(arr) {
+  let freq = new Map();
+  let maxCount = 1;
+  let result = [];
+
+  for (const num of arr) {
+    const count = (freq.get(num) || 0) + 1;
+    freq.set(num, count);
+
+    if (count > maxCount) {
+      maxCount = count;
+      result = [num];
+    } else if (count === maxCount) {
+      result.push(num);
+    }
+  }
+
+  return result.length === 1 ? result[0] : result;
+}
+
+/*
+function mostFrequentNumInArr(arr) {
+  if (arr.length === 0) return undefined;
+
+  // Build frequency map
+  const frequencies = arr.reduce((acc, num) => {
+    acc[num] = (acc[num] || 0) + 1;
+    return acc;
+  }, {});
+
+  console.log(frequencies);
+
+  // Find max frequency
+  return Object.keys(frequencies).reduce((a, b) =>
+    frequencies[a] > frequencies[b] ? a : b
+  );
+}
+*/
+// console.log(mostFrequentNumInArr([1, 2, 3, 2, 2, 8, 1, 1, 9]));
+
+/*
+Write a JavaScript program to compute the sum of the absolute differences of consecutive numbers in a given array of integers.
+*/
+
+function sumOfAbsoDiffArrNum(arr) {
+  const sum = arr
+    .slice(1)
+    .reduce((acc, curr, i) => (acc += Math.abs(curr - arr[i])), 0);
+  return sum;
+}
+
+// console.log(sumOfAbsoDiffArrNum([1, 2, 3, 4, 8, 4]));/
+
+/*
+Write a JavaScript program to find the shortest possible string. This can be 
+converted into a string and converted into a palindrome by adding characters 
+to the end of it.
+*/
+
+function createAPalindromeString(s) {
+  if (s.length <= 1) return s;
+
+  // Try adding characters one by one
+  for (let i = 0; i < s.length; i++) {
+    // Take first i characters from reverse and add to end
+    const toAdd = s.substring(0, i).split("").reverse().join("");
+    const candidate = s + toAdd;
+
+    if (isPalindrome(candidate)) {
+      return candidate;
+    }
+  }
+
+  function isPalindrome(s) {
+    return s === s.split("").reverse().join("");
+  }
+  // Worst case: add entire reverse except last char
+  return (
+    s +
+    s
+      .substring(0, s.length - 1)
+      .split("")
+      .reverse()
+      .join("")
+  );
+}
+
+// console.log(createAPalindromeString("abcddc"));
+
+/*
+Write a JavaScript program to check whether a given string contains only Latin 
+letters and no two uppercase and no two lowercase letters are in adjacent positions.
+*/
+
+// Last: 101
 //FIXME: Make a commit to repo
 //TODO: Stop the codespaces
