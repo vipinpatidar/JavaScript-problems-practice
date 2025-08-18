@@ -580,6 +580,74 @@ Write a JavaScript program to check whether a given string contains only Latin
 letters and no two uppercase and no two lowercase letters are in adjacent positions.
 */
 
-// Last: 101
+function letterInAdjUpperAndLower(string) {
+  if (string.length === 0) return true;
+
+  function isUpperCase(char) {
+    return char === char.toUpperCase();
+  }
+
+  function isLowerCase(char) {
+    return char === char.toLowerCase();
+  }
+
+  // check first letter is latin
+
+  if (!/[a-zA-Z]/.test(string[0])) return false;
+
+  for (let i = 0; i < string.length - 1; i++) {
+    let curr = string[i];
+    let next = string[i + 1];
+
+    if (!/[a-zA-Z]/.test(curr)) return false;
+
+    // Check no two uppercase adjacent
+    if (isUpperCase(curr) && isUpperCase(next)) {
+      return false;
+    }
+
+    // Check no two lowercase adjacent
+    if (isLowerCase(curr) && isLowerCase(next)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+// console.log(letterInAdjUpperAndLower("xYx"));
+// console.log(letterInAdjUpperAndLower("XXyX"));
+// console.log(letterInAdjUpperAndLower("XyX"));
+
+/*
+Write a JavaScript program to find the maximum number of a given positive 
+integer by deleting exactly one digit of the given number.
+*/
+
+function maxIntAfterDeleteOneDig(number) {
+  const numStr = number.toString();
+
+  const result = [];
+
+  for (let i = 0; i < numStr.length; i++) {
+    const numSub = numStr.slice(0, i) + numStr.slice(i + 1);
+    const newNum = parseInt(numSub);
+
+    result.push(newNum);
+  }
+
+  return Math.max(...result);
+}
+
+// console.log(maxIntAfterDeleteOneDig(100));
+// console.log(maxIntAfterDeleteOneDig(1245));
+
+/*
+Write a JavaScript program to find two elements of an array such that their 
+absolute difference is not larger than a given integer. However, it is as 
+close as possible to the integer.
+*/
+
+// Last: 104
 //FIXME: Make a commit to repo
 //TODO: Stop the codespaces
