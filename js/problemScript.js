@@ -648,6 +648,163 @@ absolute difference is not larger than a given integer. However, it is as
 close as possible to the integer.
 */
 
-// Last: 104
+function absoDiffInArrElems(array, int) {
+  let maxVal = -1;
+
+  for (let i = 0; i < array.length; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      const diff = Math.abs(array[i] - array[j]);
+
+      if (diff <= int) {
+        maxVal = Math.max(maxVal, diff);
+      }
+    }
+  }
+
+  return maxVal;
+}
+// console.log(absoDiffInArrElems([12, 10, 33, 34], 24)); // 24
+
+/*
+Write a JavaScript program to find the number of times to replace a given 
+number with the sum of its digits. This is until it converts to a single-digit 
+number. 
+*/
+
+function convSingleDig(int) {
+  function getSum(num) {
+    let singleDig = 0;
+    while (num) {
+      singleDig += num % 10;
+      num = Math.floor(num / 10);
+    }
+
+    return singleDig;
+  }
+
+  let result = 0;
+
+  while (int >= 10) {
+    result += 1;
+    int = getSum(int);
+  }
+
+  return result;
+}
+
+// console.log(convSingleDig(123));
+// console.log(convSingleDig(1236));
+
+/*
+Write a JavaScript program to sort an array of all prime numbers between 1 and a given integer.
+
+Prime numbers key factors:
+
+Greater than 1: Prime numbers must be natural numbers greater than 1. 
+Two Factors: They have exactly two positive integer factors: 1 and the number itself. 
+Not Divisible by Others: A prime number cannot be divided by any other positive integer without a remainder.  
+*/
+
+function primeNumArrByInt(int) {
+  if (int < 1) return;
+
+  let primeBool = new Array(int + 1).fill(true);
+  let primeNums = [];
+  // console.log(primeBool);
+  for (let i = 2; i <= int; i++) {
+    if (primeBool[i]) {
+      primeNums.push(i);
+
+      // disable the multiplied output by making them false like 2 * 2 = 4 disable 4 position
+      // so next time loop not run at i = 4 because 4 is devided by 2
+      for (let j = 1; i * j <= int; j++) {
+        // console.log(i * j, i, j);
+
+        primeBool[i * j] = false;
+      }
+    }
+  }
+  // console.log(primeBool);
+
+  return primeNums;
+}
+
+// console.log(primeNumArrByInt(5)); // [2, 3, 5]
+// console.log(primeNumArrByInt(11)); // [2, 3, 5, 7, 11]
+
+/*
+Write a JavaScript program to find the number of even values in sequence before the 
+first occurrence of a given number.
+*/
+
+function numberOfEvenBeforeANum(arr, num) {
+  return arr.reduce((acc, curr) => {
+    if (curr < num) {
+      if (curr % 2 === 0) {
+        acc += 1;
+      }
+    }
+    return acc;
+  }, 0);
+}
+
+// console.log(numberOfEvenBeforeANum([1, 2, 3, 4, 5, 6], 5));
+// console.log(numberOfEvenBeforeANum([1, 3, 5, 6, 7, 8], 6));
+
+/*
+Write a JavaScript program to check whether a matrix is a diagonal matrix or not. 
+In linear algebra, a diagonal matrix is a matrix in which the entries outside the main 
+diagonal are all zero (the diagonal from the upper left to the lower right).
+
+Example:
+[1, 0, 0], [0, 2, 0], [0, 0, 3] ]) = true
+[1, 0, 0], [0, 2, 3], [0, 0, 3] ]) = false
+*/
+
+function isMatrixDiagonal(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      if (i !== j && arr[i][j] !== 0) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+// console.log(
+//   isMatrixDiagonal([
+//     [1, 0, 0],
+//     [0, 2, 0],
+//     [0, 0, 3],
+//   ])
+// );
+// console.log(
+//   isMatrixDiagonal([
+//     [1, 0, 0],
+//     [0, 2, 0],
+//     [0, 2, 3],
+//   ])
+// );
+
+/*
+Write a JavaScript program to check if a point lies strictly inside the circle. 
+Input:
+Center of the circle (x, y)
+Radius of circle: r
+Point inside a circle (a, b)
+
+Formula (r² > (a - x)² + (b - y)²)
+*/
+
+function isPointInCircle({ a, b }, { x, y }, r) {
+  return Math.pow(r, 2) > Math.pow(a - x, 2) + Math.pow(b - y, 2);
+}
+
+// console.log(isPointInCircle({ a: 0, b: 0 }, { x: 2, y: 4 }, 6));
+// console.log(isPointInCircle({ a: 0, b: 0 }, { x: 6, y: 8 }, 6));
+
+// Last: 130
 //FIXME: Make a commit to repo
 //TODO: Stop the codespaces
