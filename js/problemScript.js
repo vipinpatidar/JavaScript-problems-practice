@@ -805,6 +805,180 @@ function isPointInCircle({ a, b }, { x, y }, r) {
 // console.log(isPointInCircle({ a: 0, b: 0 }, { x: 2, y: 4 }, 6));
 // console.log(isPointInCircle({ a: 0, b: 0 }, { x: 6, y: 8 }, 6));
 
-// Last: 130
+/*
+Write a JavaScript program to find the number of even digits in a given integer.
+*/
+
+function evenDigiInInt(int) {
+  let num = 0;
+
+  while (int) {
+    num += int % 2 === 0;
+
+    int = Math.floor(int / 10);
+  }
+
+  return num;
+}
+
+// console.log(evenDigiInInt(123));
+// console.log(evenDigiInInt(1230));
+
+/*
+Write a JavaScript program to create an array of prefix sums of the given array.
+
+In computer science, the prefix sum, cumulative sum, inclusive scan, or simply scan of a 
+sequence of numbers x0, x1, x2, ... is a second sequence of numbers y0, y1, y2, ..., the 
+sums of prefixes of the input sequence:
+y0 = x0
+y1 = x0 + x1
+y2 = x0 + x1+ x2
+*/
+
+function arrayOfPrefixSum(arr) {
+  let sum = 0;
+  return arr.map((elem) => (sum += elem));
+}
+
+// console.log(arrayOfPrefixSum([1, 2, 3, 4, 5, 6, 7, 8]));
+
+/*
+Write a JavaScript program to find all distinct prime factors of a given integer
+*/
+
+function intPrimeFactors(int) {
+  function isPrime(num) {
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) return false; // if num is divided by i and itself then it is not prime
+    }
+
+    return true;
+  }
+
+  const result = [];
+
+  for (let i = 2; i <= int; i++) {
+    // While 'i' is a prime factor and divides 'num' evenly
+    while (isPrime(i) && int % i === 0) {
+      if (!result.includes(i)) result.push(i); // Add 'i' to the result array if it's not already present
+
+      int /= i;
+    }
+  }
+
+  return result;
+}
+
+// console.log(intPrimeFactors(100));
+// console.log(intPrimeFactors(103));
+
+/*
+Write a JavaScript program to remove all characters from a given string that appear more than once.
+*/
+
+function removeRepeatCharFromStr(str) {
+  const chars = [...str]; // handles Unicode code points (e.g., emojis) better than str[i]
+
+  // 1) Build frequency map with reduce
+  const freq = chars.reduce(
+    (map, ch) => map.set(ch, (map.get(ch) || 0) + 1),
+    new Map()
+  );
+
+  // 2) Build result string with reduce (keep only count === 1)
+  return chars.reduce((acc, ch) => (freq.get(ch) === 1 ? acc + ch : acc), "");
+}
+
+// console.log(removeRepeatCharFromStr("abcdabc"));
+// console.log(removeRepeatCharFromStr("python"));
+// console.log(removeRepeatCharFromStr("abcabc"));
+
+/*
+Write a JavaScript program to check whether all the digits in a given number are the same or not.  
+*/
+
+function allDigiSameInNum(num) {
+  const first = num % 10;
+
+  while (num) {
+    if (num % 10 !== first) return false;
+    num = Math.floor(num / 10);
+  }
+
+  return true;
+}
+
+// console.log(allDigiSameInNum(1234));
+// console.log(allDigiSameInNum(11111));
+// console.log(allDigiSameInNum(22222));
+
+/*
+Write a JavaScript program to find the number of elements in both arrays.
+*/
+
+function numOfSameNumInArr(arr1, arr2) {
+  let num = 0;
+
+  [...new Set(arr1)].map((elem) => [...new Set(arr2)].includes(elem) && num++);
+  return num;
+}
+
+// console.log(numOfSameNumInArr([1, 2, 3, 4], [1, 2, 3, 4]));
+// console.log(numOfSameNumInArr([1, 2, 5, 6], [1, 2, 3, 4]));
+// console.log(numOfSameNumInArr([1, 2, 1], [1, 2, 3, 4]));
+
+/*
+Write a JavaScript program to sort the strings of a given array of strings in order of increasing length.
+*/
+
+function sortStrArrByLength(arr) {
+  return arr.sort((a, b) => a.length - b.length);
+}
+
+// console.log(
+//   sortStrArrByLength(["xyz", "acd", "aa", "bb", "zzz", "", "a", "b"])
+// );
+
+/*
+Write a JavaScript program to find the maximum integer n such that 1 + 2 + ... + n <= a given integer.
+*/
+
+function maxIntInNSum(num) {
+  let sum = 0;
+  let i = 0;
+
+  while (sum <= num) {
+    // console.log(i);
+    sum += i++;
+  }
+
+  return i - 2;
+}
+
+// console.log(maxIntInNSum(11));
+
+/*
+Write a JavaScript program to swap pairs of adjacent digits of a given integer of even length.
+*/
+
+function swapAdjDigOfInt(arr) {
+  if (arr.length % 2 !== 0) return "Array length is not even.";
+
+  const newArr = arr.map((elem, i, array) => {
+    if (i % 2 === 0) {
+      return array[i + 1]; // Return next element
+    } else {
+      return array[i - 1]; // Return previous element
+    }
+  });
+  // console.log(newArr);
+
+  return newArr;
+}
+
+// console.log(swapAdjDigOfInt([1, 2, 3, 4]));
+// console.log(swapAdjDigOfInt([1, 2, 3, 4, 7, 8]));
+
+// Last: 150
 //FIXME: Make a commit to repo
 //TODO: Stop the codespaces
